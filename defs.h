@@ -10,9 +10,6 @@ struct sleeplock;
 struct stat;
 struct superblock;
 
-int cps(void);
-
-
 // bio.c
 void            binit(void);
 struct buf*     bread(uint, uint);
@@ -123,6 +120,7 @@ void            userinit(void);
 int             wait(void);
 void            wakeup(void*);
 void            yield(void);
+int             cps(void);
 
 // swtch.S
 void            swtch(struct context**, struct context*);

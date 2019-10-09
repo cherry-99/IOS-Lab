@@ -342,6 +342,7 @@ scheduler(void)
       c->proc = p;
       switchuvm(p);
       p->state = RUNNING;
+	p->priority = 10;
 
       swtch(&(c->scheduler), p->context);
       switchkvm();
@@ -536,16 +537,18 @@ procdump(void)
 int
 cps(void)
 {
-  static char *states[] = {
+  /*static char *states[] = {
   [UNUSED]    "unused",
   [EMBRYO]    "embryo",
-  [SLEEPING]  "sleep",
+  [SLEEPING]  "sleep ",
   [RUNNABLE]  "runble",
-  [RUNNING]   "run",
+  [RUNNING]   "run   ",
   [ZOMBIE]    "zombie"
   };
+  //int i;
   struct proc *p;
   char *state;
+  //uint pc[10];
 
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if(p->state == UNUSED)
@@ -554,8 +557,26 @@ cps(void)
       state = states[p->state];
     else
       state = "???";
-    cprintf("(%d, %s, %s)", p->pid, p->name , state);
-    cprintf("\n");
+    cprintf("%d %s %s", p->pid, state, p->name);
+	cprintf("ps called\n");
+	}
+	return 0;*/
+  static char *states[] = {
+  [UNUSED]    "unused",
+  [EMBRYO]    "embryo",
+  [SLEEPING]  "sleep ",
+  [RUNNABLE]  "runble",
+  [RUNNING]   "run   ",
+  [ZOMBIE]    "zombie"
+  };
+  
+  struct proc *p=ptable.proc;
+  // Iterate through process table
+  while(p < &ptable.proc[NPROC] && p->state!=UNUSED)
+  {
+  	cprintf("(%d, %s, %s, %d)\n", p->pid,p->name,states[p->state], p->priority); 
+	p++; 	
   }
-  return 1; 
+  return 0;
+  exit();
 }

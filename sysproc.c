@@ -7,13 +7,6 @@
 #include "mmu.h"
 #include "proc.h"
 
-
-int
-sys_cps(void)
-{
-	return cps();
-}
-
 int
 sys_fork(void)
 {
@@ -95,4 +88,11 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+//dumps ptable onto proc.dump file
+int
+sys_cps(void)
+{
+	return cps();
 }

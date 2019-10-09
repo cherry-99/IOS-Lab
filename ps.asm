@@ -5,12 +5,12 @@ _ps:     file format elf32-i386
 Disassembly of section .text:
 
 00000000 <main>:
-#include"stat.h"
-#include"user.h"
+#include "stat.h"
+#include "user.h"
 
 int
-main(void)
-{
+main(int argc, char **argv)
+{  
    0:	8d 4c 24 04          	lea    0x4(%esp),%ecx
    4:	83 e4 f0             	and    $0xfffffff0,%esp
    7:	ff 71 fc             	pushl  -0x4(%ecx)
@@ -18,9 +18,10 @@ main(void)
    b:	89 e5                	mov    %esp,%ebp
    d:	51                   	push   %ecx
    e:	83 ec 04             	sub    $0x4,%esp
-	cps();
+  cps();
   11:	e8 ec 02 00 00       	call   302 <cps>
-	exit();
+  	  
+  exit();
   16:	e8 47 02 00 00       	call   262 <exit>
   1b:	66 90                	xchg   %ax,%ax
   1d:	66 90                	xchg   %ax,%ax
